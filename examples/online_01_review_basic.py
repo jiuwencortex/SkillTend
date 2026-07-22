@@ -17,13 +17,13 @@ Usage:
 import asyncio
 from pathlib import Path
 
-from skilltend import BackgroundReviewConfig, BackgroundReviewRail
+from skilltend import ReviewerConfig, Reviewer
 
 
 async def main():
     # ── 1. Create the rail with default configuration ─────────────────────────
     # Defaults mirror Hermes: 10-turn memory nudge, 10-tool skill nudge.
-    config = BackgroundReviewConfig(
+    config = ReviewerConfig(
         enabled=True,
         skill_nudge_interval=10,     # review skills every 10 tool calls
         memory_nudge_interval=10,    # review memory every 10 user turns
@@ -32,9 +32,9 @@ async def main():
         # memory_root defaults to ~/.jiuwen/memories/
     )
 
-    rail = BackgroundReviewRail(config=config)
+    rail = Reviewer(config=config)
 
-    print("BackgroundReviewRail created.")
+    print("Reviewer created.")
     print(f"  Priority : {rail.priority}  (runs after SkillEvolutionRail=80)")
     print(f"  Config   : skill_nudge={config.skill_nudge_interval}  "
           f"memory_nudge={config.memory_nudge_interval}")

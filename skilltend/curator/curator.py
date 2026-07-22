@@ -54,7 +54,7 @@ from skilltend.stores.skill.usages.usage_sidecar import UsageSidecar
 from skilltend.stores.skill.usages.usage_writer import _write_usage
 
 if TYPE_CHECKING:
-    from skilltend.config import BackgroundReviewConfig
+    from skilltend.config import ReviewerConfig
 
 
 # ── Data types ─────────────────────────────────────────────────────────────────
@@ -157,14 +157,14 @@ async def _set_skill_state(
 # ── State file I/O ─────────────────────────────────────────────────────────────
 
 
-def _state_path(config: "BackgroundReviewConfig") -> Path:
+def _state_path(config: "ReviewerConfig") -> Path:
     if config.curator_state_path:
         return config.curator_state_path
     root = config.skills_root or (Path.home() / ".jiuwen" / "skills")
     return root.parent / "curator_state.json"
 
 
-def _load_state(config: "BackgroundReviewConfig") -> CuratorState:
+def _load_state(config: "ReviewerConfig") -> CuratorState:
     p = _state_path(config)
     if p.exists():
         try:
@@ -179,7 +179,7 @@ def _load_state(config: "BackgroundReviewConfig") -> CuratorState:
     return CuratorState()
 
 
-def _save_state(config: "BackgroundReviewConfig", state: CuratorState) -> None:
+def _save_state(config: "ReviewerConfig", state: CuratorState) -> None:
     p = _state_path(config)
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -192,7 +192,7 @@ def _save_state(config: "BackgroundReviewConfig", state: CuratorState) -> None:
 
 
 async def _run_phase1(
-    config: "BackgroundReviewConfig",
+    config: "ReviewerConfig",
 ) -> tuple[List[LifecycleTransition], List[str]]:
     """Apply rule-based ACTIVE/STALE/ARCHIVE transitions.
 
@@ -271,7 +271,7 @@ async def _run_phase1(
 
 
 async def _run_phase2(
-    config: "BackgroundReviewConfig",
+    config: "ReviewerConfig",
     model: str,
 ) -> List[ConsolidationSuggestion]:
     """Ask an LLM to identify overlapping skills and suggest consolidations.
@@ -378,12 +378,12 @@ async def _run_phase2(
 # ── Main public class ──────────────────────────────────────────────────────────
 
 
-class SkillCurator:
+class Curator:
     """Scheduled skill lifecycle maintenance, mirroring Hermes curator.py.
 
-    Typical usage in BackgroundReviewRail::
+    Typical usage in Reviewer::
 
-        curator = SkillCurator(config)
+        curator = Curator(config)
 
         # In after_invoke():
         idle_seconds = time.monotonic() - self._last_invoke_at
@@ -392,7 +392,7 @@ class SkillCurator:
             logger.info(result.summary_line())
     """
 
-    def __init__(self, config: "BackgroundReviewConfig") -> None:
+    def __init__(self, config: "ReviewerConfig") -> None:
         self._config = config
 
     async def maybe_run(

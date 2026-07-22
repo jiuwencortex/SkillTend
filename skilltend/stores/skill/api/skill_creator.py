@@ -56,7 +56,7 @@ async def skill_create(
         return False, f"Skill '{name}' already exists."
 
     # Import here to avoid circular imports at module level
-    from skilltend.review_executor.provenance import get_write_origin
+    from skilltend.pipeline.provenance import get_write_origin
 
     origin = get_write_origin()
     created_by = "agent" if origin == "background_review" else "user"

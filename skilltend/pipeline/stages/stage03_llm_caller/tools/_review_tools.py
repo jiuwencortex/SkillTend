@@ -16,9 +16,9 @@ Jiuwen mapping:
 """
 from __future__ import annotations
 
-from skilltend.review_executor.stages.stage03_llm_caller.tools._memory_write_tool import MEMORY_WRITE_TOOL
-from skilltend.review_executor.stages.stage03_llm_caller.tools._skill_patch_tool import SKILL_PATCH_TOOL
-from skilltend.review_executor.stages.stage03_llm_caller.tools._skill_write_tool import SKILL_WRITE_TOOL
+from skilltend.pipeline.stages.stage03_llm_caller.tools._memory_write_tool import MEMORY_WRITE_TOOL
+from skilltend.pipeline.stages.stage03_llm_caller.tools._skill_patch_tool import SKILL_PATCH_TOOL
+from skilltend.pipeline.stages.stage03_llm_caller.tools._skill_write_tool import SKILL_WRITE_TOOL
 
 # ── Tool schemas exposed to the review LLM ───────────────────────────────────
 

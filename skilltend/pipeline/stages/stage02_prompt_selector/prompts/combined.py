@@ -4,7 +4,7 @@
 
 Faithful translations of Hermes's three review prompts into the Jiuwen context.
 """
-from skilltend.review_executor.stages.stage02_prompt_selector.prompts.skill import SKILL_REVIEW_PROMPT
+from skilltend.pipeline.stages.stage02_prompt_selector.prompts.skill import SKILL_REVIEW_PROMPT
 
 
 COMBINED_REVIEW_PROMPT = """\

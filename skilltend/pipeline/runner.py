@@ -15,19 +15,19 @@ from __future__ import annotations
 import time
 from typing import Any, Dict, List
 
-from skilltend.config import BackgroundReviewConfig
-from skilltend.review_executor.stages.stage01_conversation_builder.stage import build_conversation_context
-from skilltend.review_executor.stages.stage02_prompt_selector.stage import build_review_prompts
-from skilltend.review_executor.stages.stage03_llm_caller.stage import call_llm_with_timeout
-from skilltend.review_executor.stages.stage04_tool_call_dispatcher.stage import dispatch_all_tool_calls
-from skilltend.review_executor.stages.stage05_result_assembler.stage import assemble_review_result
+from skilltend.config import ReviewerConfig
+from skilltend.pipeline.stages.stage01_conversation_builder.stage import build_conversation_context
+from skilltend.pipeline.stages.stage02_prompt_selector.stage import build_review_prompts
+from skilltend.pipeline.stages.stage03_llm_caller.stage import call_llm_with_timeout
+from skilltend.pipeline.stages.stage04_tool_call_dispatcher.stage import dispatch_all_tool_calls
+from skilltend.pipeline.stages.stage05_result_assembler.stage import assemble_review_result
 from skilltend.types import ReviewResult, ReviewTrigger
 
 
 async def run_background_review(
     messages_snapshot: List[Dict[str, Any]],
     trigger: ReviewTrigger,
-    config: BackgroundReviewConfig,
+    config: ReviewerConfig,
     model: str,
     session_id: str,
     parent_session_id: str = "",

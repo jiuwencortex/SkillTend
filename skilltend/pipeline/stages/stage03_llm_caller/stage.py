@@ -22,7 +22,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from .review_llm_caller import call_review_llm
-from ....config import BackgroundReviewConfig
+from ....config import ReviewerConfig
 
 
 async def call_llm_with_timeout(
@@ -30,7 +30,7 @@ async def call_llm_with_timeout(
     conversation_text: str,
     review_prompt: str,
     model: str,
-    config: BackgroundReviewConfig,
+    config: ReviewerConfig,
 ) -> Tuple[List[Dict[str, Any]], Optional[str]]:
     """Call the review LLM with a hard timeout, absorbing errors into the return value.
 

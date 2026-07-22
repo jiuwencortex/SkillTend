@@ -7,7 +7,7 @@ from .curator import (
     CuratorState,
     ConsolidationSuggestion,
     LifecycleTransition,
-    SkillCurator,
+    Curator,
 )
 
 __all__ = [
@@ -15,5 +15,5 @@ __all__ = [
     "CuratorState",
     "ConsolidationSuggestion",
     "LifecycleTransition",
-    "SkillCurator",
+    "Curator",
 ]

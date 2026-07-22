@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from .tool_call_dispatcher import dispatch_tool_call
-from ....config import BackgroundReviewConfig
+from ....config import ReviewerConfig
 from ....stores.memory import MemoryStore
 from ....types import ReviewAction
 
@@ -15,7 +15,7 @@ async def dispatch_all_tool_calls(
     tool_calls: List[Dict[str, Any]],
     skills_root: Path,
     memory_store: MemoryStore,
-    config: BackgroundReviewConfig,
+    config: ReviewerConfig,
     session_id: str,
 ) -> List[ReviewAction]:
     """Dispatch every tool call to skill_store / memory_store and collect actions.

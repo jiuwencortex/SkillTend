@@ -1,6 +1,6 @@
 # coding: utf-8
 # Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
-"""Configuration dataclasses for online (BackgroundReviewRail) track"""
+"""Configuration dataclasses for the online track (Reviewer + Curator)."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -9,8 +9,8 @@ from typing import List, Optional
 
 
 @dataclass
-class BackgroundReviewConfig:
-    """All tunable parameters for the background review rail.
+class ReviewerConfig:
+    """All tunable parameters for the background reviewer and curator.
 
     Mirrors Hermes cli-config.yaml [memory] and [skills] sections.
     """

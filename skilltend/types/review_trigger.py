@@ -1,9 +1,9 @@
 # coding: utf-8
 # Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
-"""Shared data types for agent_evolving_hermes.
+"""Shared data types for skilltend.
 
 Contains enums and dataclasses used by both the online
-(BackgroundReviewRail) and offline (GEPA skill evolver) tracks.
+(Reviewer) and offline (GEPA skill evolver) tracks.
 """
 from dataclasses import dataclass
 

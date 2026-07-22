@@ -4,7 +4,7 @@
 The Problem
 -----------
 On gateway platforms (Telegram, Discord, web chat), Jiuwen creates a FRESH
-agent instance for every incoming message.  A fresh `BackgroundReviewRail`
+agent instance for every incoming message.  A fresh `Reviewer`
 starts with both nudge counters at zero.
 
 Without hydration, this means:
@@ -26,7 +26,7 @@ Usage:
     python examples/agent_evolving_hermess/05_session_resume_hydration.py
 """
 import asyncio
-from skilltend import BackgroundReviewConfig, BackgroundReviewRail
+from skilltend import ReviewerConfig, Reviewer
 
 
 def simulate_history(num_user_turns: int):
@@ -39,7 +39,7 @@ def simulate_history(num_user_turns: int):
 
 
 async def main():
-    config = BackgroundReviewConfig(
+    config = ReviewerConfig(
         enabled=True,
         skill_nudge_interval=10,
         memory_nudge_interval=10,
@@ -48,13 +48,13 @@ async def main():
     )
 
     print("── Scenario 1: Fresh session (no history) ──────────────────")
-    rail_fresh = BackgroundReviewRail(config=config)
+    rail_fresh = Reviewer(config=config)
     print(f"  Counters (fresh)  : {rail_fresh.pending_counts()}")
     # user_turns_since_review=0, tool_iters=0
 
     print("\n── Scenario 2: Gateway resume — 9 prior turns ──────────────")
     history_9 = simulate_history(9)
-    rail_gateway = BackgroundReviewRail(config=config)
+    rail_gateway = Reviewer(config=config)
     rail_gateway.hydrate_from_history(history_9)
     counts = rail_gateway.pending_counts()
     print(f"  Prior user turns  : 9")
@@ -66,7 +66,7 @@ async def main():
 
     print("\n── Scenario 3: Gateway resume — 25 prior turns ─────────────")
     history_25 = simulate_history(25)
-    rail_25 = BackgroundReviewRail(config=config)
+    rail_25 = Reviewer(config=config)
     rail_25.hydrate_from_history(history_25)
     counts = rail_25.pending_counts()
     print(f"  Prior user turns  : 25")
@@ -76,7 +76,7 @@ async def main():
     print("  ✓ Counter correctly restored to 5 (mid-cycle)")
 
     print("\n── Scenario 4: Idempotent — hydrating twice ─────────────────")
-    rail_idempotent = BackgroundReviewRail(config=config)
+    rail_idempotent = Reviewer(config=config)
     rail_idempotent.hydrate_from_history(history_9)
     rail_idempotent.hydrate_from_history(history_25)  # second call is a no-op
     counts = rail_idempotent.pending_counts()

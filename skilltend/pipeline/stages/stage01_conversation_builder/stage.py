@@ -4,13 +4,13 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 from .messages_to_text import messages_to_text
-from ....config import BackgroundReviewConfig
+from ....config import ReviewerConfig
 from ....stores.memory import MemoryStore
 
 
 def build_conversation_context(
     messages_snapshot: List[Dict[str, Any]],
-    config: BackgroundReviewConfig,
+    config: ReviewerConfig,
 ) -> Tuple[Path, MemoryStore, str]:
     """Resolve storage roots, create MemoryStore, serialise conversation to text.
 

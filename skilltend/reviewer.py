@@ -1,6 +1,6 @@
 # coding: utf-8
 # Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
-"""BackgroundReviewRail — Jiuwen implementation of Hermes background review.
+"""Reviewer — Jiuwen implementation of Hermes background review.
 
 Priority: 70
   (below existing SkillEvolutionRail at 80 and HealingRail at 90;
@@ -49,9 +49,9 @@ logger = logging.getLogger(__name__)
 from openjiuwen.core.single_agent.rail.base import AgentCallbackContext
 from openjiuwen.harness.rails.base import DeepAgentRail
 
-from skilltend.config import BackgroundReviewConfig
-from skilltend.curator import SkillCurator
-from skilltend.review_executor import run_background_review
+from skilltend.config import ReviewerConfig
+from skilltend.curator import Curator
+from skilltend.pipeline.runner import run_background_review
 from skilltend.types import ReviewMode, ReviewResult, ReviewTrigger
 
 
@@ -61,8 +61,8 @@ _MEMORY_TOOL_NAMES: frozenset = frozenset({"memory_write", "memory"})
 _SKILL_TOOL_NAMES: frozenset = frozenset({"skill_write", "skill_patch", "skill_manage", "skill_create"})
 
 
-class BackgroundReviewRail(DeepAgentRail):
-    """Hermes-style background review rail for Jiuwen.
+class Reviewer(DeepAgentRail):
+    """Hermes-style background reviewer for Jiuwen.
 
     After every N tool iterations or M user turns, spawns an async background
     task that reads the full conversation and uses an LLM to write targeted
@@ -73,9 +73,9 @@ class BackgroundReviewRail(DeepAgentRail):
 
     priority: int = 70
 
-    def __init__(self, config: Optional[BackgroundReviewConfig] = None):
+    def __init__(self, config: Optional[ReviewerConfig] = None):
         super().__init__()
-        self._config: BackgroundReviewConfig = config or BackgroundReviewConfig()
+        self._config: ReviewerConfig = config or ReviewerConfig()
         # Nudge counters (mirrors Hermes _turns_since_memory, _iters_since_skill)
         self._user_turn_count: int = 0
         self._tool_iter_count: int = 0
@@ -87,7 +87,7 @@ class BackgroundReviewRail(DeepAgentRail):
         # Tracks idle time between invokes (for curator scheduling gate).
         # Initialized to current monotonic time; idle = now - _invoke_end_at
         # at the START of each after_invoke before updating.
-        self._curator: SkillCurator = SkillCurator(self._config)
+        self._curator: Curator = Curator(self._config)
         self._curator_task: Optional[asyncio.Task] = None
         self._invoke_end_at: float = time.monotonic()
 
@@ -217,10 +217,10 @@ class BackgroundReviewRail(DeepAgentRail):
 
         if tool_name in _MEMORY_TOOL_NAMES:
             self._user_turn_count = 0
-            logger.debug("BackgroundReviewRail: memory tool fired — reset user_turn_count")
+            logger.debug("Reviewer: memory tool fired — reset user_turn_count")
         if tool_name in _SKILL_TOOL_NAMES:
             self._tool_iter_count = 0
-            logger.debug("BackgroundReviewRail: skill tool fired — reset tool_iter_count")
+            logger.debug("Reviewer: skill tool fired — reset tool_iter_count")
 
         if self._config.skill_nudge_interval > 0:
             self._tool_iter_count += 1
@@ -245,7 +245,7 @@ class BackgroundReviewRail(DeepAgentRail):
 
             # ── Guard: skip if interrupted ──────────────────────────────────
             if self._is_interrupted(ctx):
-                logger.debug("BackgroundReviewRail: skipping review — invoke was interrupted")
+                logger.debug("Reviewer: skipping review — invoke was interrupted")
                 return
 
             # ── Guard: minimum session turns before any review fires ────────
@@ -301,7 +301,7 @@ class BackgroundReviewRail(DeepAgentRail):
                 self._run_review(messages_snapshot, trigger, model, session_id)
             )
             logger.debug(
-                "BackgroundReviewRail: spawned review task [mode=%s session=%s]",
+                "Reviewer: spawned review task [mode=%s session=%s]",
                 mode.value,
                 session_id,
             )
@@ -330,7 +330,7 @@ class BackgroundReviewRail(DeepAgentRail):
         )
 
     async def _run_curator_bg(self, idle_seconds: float, model: str) -> None:
-        """Background coroutine: delegate to SkillCurator.maybe_run()."""
+        """Background coroutine: delegate to Curator.maybe_run()."""
         try:
             result = await self._curator.maybe_run(
                 idle_seconds=idle_seconds,
@@ -338,14 +338,14 @@ class BackgroundReviewRail(DeepAgentRail):
             )
             if result:
                 logger.info(
-                    "BackgroundReviewRail curator: %s [%.1fs]",
+                    "Reviewer curator: %s [%.1fs]",
                     result.summary_line(),
                     result.elapsed_seconds,
                 )
                 if result.transitions:
                     print(f"\n🗂️  Curator: {result.summary_line()}", flush=True)
         except Exception as exc:
-            logger.error("BackgroundReviewRail curator task crashed: %s", exc)
+            logger.error("Reviewer curator task crashed: %s", exc)
 
     # ── Background task ───────────────────────────────────────────────────────
 
@@ -382,7 +382,7 @@ class BackgroundReviewRail(DeepAgentRail):
             if result.error:
                 logger.warning("BackgroundReview error: %s", result.error)
         except Exception as e:
-            logger.error("BackgroundReviewRail background task crashed: %s", e)
+            logger.error("Reviewer background task crashed: %s", e)
 
     # ── Lifecycle ─────────────────────────────────────────────────────────────
 

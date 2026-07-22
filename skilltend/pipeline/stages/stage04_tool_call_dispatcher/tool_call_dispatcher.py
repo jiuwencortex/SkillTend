@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Tuple, Optional
 
-from ....config import BackgroundReviewConfig
+from ....config import ReviewerConfig
 from ....stores import MemoryStore
 from ....stores import skill_create, skill_edit, skill_patch
 from ....types import ReviewAction
@@ -14,7 +14,7 @@ async def dispatch_tool_call(
     args: Dict[str, Any],
     skill_store_root: Path,
     memory_store: MemoryStore,
-    config: BackgroundReviewConfig,
+    config: ReviewerConfig,
     session_id: str,
 ) -> Tuple[bool, str, Optional[ReviewAction]]:
     """Execute one tool call. Returns (success, message, action_or_none)."""

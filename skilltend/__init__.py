@@ -1,34 +1,37 @@
 # coding: utf-8
 # Copyright (c) Huawei Technologies Co., Ltd. 2026. All rights reserved.
-"""agent_evolving — Hermes-style self-evolution for Jiuwen.
+"""skilltend — Hermes-style online skill maintenance for Jiuwen.
 
-Two independent tracks, one package:
+Provides two cooperating components:
 
-Track — Online (BackgroundReviewRail)
-  Mirrors Hermes background review daemon thread.
-  Spawns an asyncio task after every N tool-calls or M user turns,
-  reads the conversation, and uses an LLM to update SKILL.md files
-  and memory entries directly.
+  Reviewer
+    Spawns an asyncio task after every N tool-calls or M user turns,
+    reads the conversation, and uses an LLM to update SKILL.md files
+    and memory entries directly.
+
+  Curator
+    Scheduled background daemon that transitions skills between
+    ACTIVE / STALE / ARCHIVED states based on usage age.
 """
 from __future__ import annotations
 
-# ── Online track ──────────────────────────────────────────────────────────────
-from skilltend.background_review_rail import BackgroundReviewRail
-from skilltend.review_executor.stages.stage02_prompt_selector.prompts import (
+# ── Reviewer + config ─────────────────────────────────────────────────────────
+from skilltend.reviewer import Reviewer
+from skilltend.pipeline.stages.stage02_prompt_selector.prompts import (
     COMBINED_REVIEW_PROMPT,
     MEMORY_REVIEW_PROMPT,
     SKILL_REVIEW_PROMPT,
     select_prompt,
 )
-from skilltend.config import BackgroundReviewConfig
+from skilltend.config import ReviewerConfig
 from .stores import MemoryStore
-from skilltend.review_executor.provenance import (
+from skilltend.pipeline.provenance import (
     background_review_context,
     get_write_origin,
     make_write_metadata,
     set_write_origin,
 )
-from skilltend.review_executor import run_background_review
+from skilltend.pipeline import run_background_review
 from .stores import (
     SKILL_STATE_ACTIVE,
     SKILL_STATE_ARCHIVED,
@@ -55,9 +58,9 @@ from skilltend.types import (
 
 
 __all__ = [
-    # Online track — rail + config
-    "BackgroundReviewRail",
-    "BackgroundReviewConfig",
+    # Online track — reviewer + config
+    "Reviewer",
+    "ReviewerConfig",
     "ReviewMode",
     "ReviewTrigger",
     "ReviewAction",

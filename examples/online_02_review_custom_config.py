@@ -14,8 +14,8 @@ import asyncio
 from pathlib import Path
 
 from skilltend import (
-    BackgroundReviewConfig,
-    BackgroundReviewRail,
+    ReviewerConfig,
+    Reviewer,
     ReviewMode,
     ReviewTrigger,
     run_background_review,
@@ -24,7 +24,7 @@ from skilltend import (
 
 async def main():
     # ── 1. Custom config: low thresholds for fast testing ────────────────────
-    config = BackgroundReviewConfig(
+    config = ReviewerConfig(
         enabled=True,
         skill_nudge_interval=3,      # trigger after just 3 tool calls (for testing)
         memory_nudge_interval=3,     # trigger after just 3 user turns
@@ -37,7 +37,7 @@ async def main():
         memory_root=Path.home() / ".jiuwen" / "memories",
     )
 
-    rail = BackgroundReviewRail(config=config)
+    rail = Reviewer(config=config)
     print(f"Rail created. Protected skills: {config.protected_skill_names}")
 
     # ── 2. Directly call run_background_review() for testing ─────────────────
