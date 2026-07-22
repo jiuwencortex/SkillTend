@@ -7,7 +7,7 @@ Contains enums and dataclasses used by both the online
 """
 from dataclasses import dataclass
 
-from agent_evolving.online.types.review_mode import ReviewMode
+from skilltend.types.review_mode import ReviewMode
 
 
 @dataclass

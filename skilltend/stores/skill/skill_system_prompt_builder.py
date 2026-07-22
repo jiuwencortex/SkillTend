@@ -19,9 +19,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List
 
-from agent_evolving.online.stores.skill.api.skill_lister import skill_list
-from agent_evolving.online.stores.skill.api.skill_reader import skill_read
-from agent_evolving.online.stores.skill.frontmatter_handler import _parse_frontmatter
+from skilltend.stores.skill.api.skill_lister import skill_list
+from skilltend.stores.skill.api.skill_reader import skill_read
+from skilltend.stores.skill.frontmatter_handler import _parse_frontmatter
 
 
 # ── Public API ────────────────────────────────────────────────────────────────

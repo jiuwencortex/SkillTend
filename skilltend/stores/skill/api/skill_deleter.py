@@ -20,11 +20,11 @@ import shutil
 from pathlib import Path
 from typing import List, Tuple
 
-from agent_evolving.online.stores.skill.frontmatter_handler import _is_immutable
-from agent_evolving.online.stores.skill.skill_finder import _find_skill
-from agent_evolving.online.stores.skill import _get_lock
-from agent_evolving.online.stores.skill.usages.usage_reader import _read_usage
-from agent_evolving.online.stores.skill import _write_usage
+from skilltend.stores.skill.frontmatter_handler import _is_immutable
+from skilltend.stores.skill.skill_finder import _find_skill
+from skilltend.stores.skill import _get_lock
+from skilltend.stores.skill.usages.usage_reader import _read_usage
+from skilltend.stores.skill import _write_usage
 
 
 # ── Public API ────────────────────────────────────────────────────────────────

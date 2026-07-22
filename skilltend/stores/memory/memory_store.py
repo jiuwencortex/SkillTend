@@ -6,12 +6,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, Optional
 
-from agent_evolving.online.stores.memory._io_helpers import _default_memory_root
-from agent_evolving.online.stores.memory._locking import _LockMixin
-from agent_evolving.online.stores.memory._snapshot import _SnapshotMixin
-from agent_evolving.online.stores.memory._drift import _DriftMixin
-from agent_evolving.online.stores.memory._mutations import _MutationsMixin
-from agent_evolving.online.stores.memory import _ReadsMixin
+from skilltend.stores.memory._io_helpers import _default_memory_root
+from skilltend.stores.memory._locking import _LockMixin
+from skilltend.stores.memory._snapshot import _SnapshotMixin
+from skilltend.stores.memory._drift import _DriftMixin
+from skilltend.stores.memory._mutations import _MutationsMixin
+from skilltend.stores.memory import _ReadsMixin
 
 
 class MemoryStore(

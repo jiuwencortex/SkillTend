@@ -15,13 +15,13 @@ from __future__ import annotations
 import time
 from typing import Any, Dict, List
 
-from agent_evolving.online.config import BackgroundReviewConfig
-from agent_evolving.online.review_executor.stages.stage01_conversation_builder.stage import build_conversation_context
-from agent_evolving.online.review_executor.stages.stage02_prompt_selector.stage import build_review_prompts
-from agent_evolving.online.review_executor.stages.stage03_llm_caller.stage import call_llm_with_timeout
-from agent_evolving.online.review_executor.stages.stage04_tool_call_dispatcher.stage import dispatch_all_tool_calls
-from agent_evolving.online.review_executor.stages.stage05_result_assembler.stage import assemble_review_result
-from agent_evolving.online.types import ReviewResult, ReviewTrigger
+from skilltend.config import BackgroundReviewConfig
+from skilltend.review_executor.stages.stage01_conversation_builder.stage import build_conversation_context
+from skilltend.review_executor.stages.stage02_prompt_selector.stage import build_review_prompts
+from skilltend.review_executor.stages.stage03_llm_caller.stage import call_llm_with_timeout
+from skilltend.review_executor.stages.stage04_tool_call_dispatcher.stage import dispatch_all_tool_calls
+from skilltend.review_executor.stages.stage05_result_assembler.stage import assemble_review_result
+from skilltend.types import ReviewResult, ReviewTrigger
 
 
 async def run_background_review(

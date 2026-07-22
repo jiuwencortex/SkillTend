@@ -1,6 +1,6 @@
-from agent_evolving.online.stores.skill.skill_states import (SKILL_STATE_ACTIVE, SKILL_STATE_ARCHIVED,
+from skilltend.stores.skill.skill_states import (SKILL_STATE_ACTIVE, SKILL_STATE_ARCHIVED,
                                               SKILL_STATE_STALE)
-from agent_evolving.online.stores.skill.usages import (
+from skilltend.stores.skill.usages import (
     UsageSidecar,
     usage_writer,
 )
@@ -17,4 +17,4 @@ from .api import (
     skill_read,
     skill_restore,
 )
-from agent_evolving.online.stores.skill.skill_system_prompt_builder import build_skills_system_prompt
+from skilltend.stores.skill.skill_system_prompt_builder import build_skills_system_prompt

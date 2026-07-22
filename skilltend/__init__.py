@@ -13,22 +13,22 @@ Track — Online (BackgroundReviewRail)
 from __future__ import annotations
 
 # ── Online track ──────────────────────────────────────────────────────────────
-from agent_evolving.online.background_review_rail import BackgroundReviewRail
-from agent_evolving.online.review_executor.stages.stage02_prompt_selector.prompts import (
+from skilltend.background_review_rail import BackgroundReviewRail
+from skilltend.review_executor.stages.stage02_prompt_selector.prompts import (
     COMBINED_REVIEW_PROMPT,
     MEMORY_REVIEW_PROMPT,
     SKILL_REVIEW_PROMPT,
     select_prompt,
 )
-from agent_evolving.online.config import BackgroundReviewConfig
+from skilltend.config import BackgroundReviewConfig
 from .stores import MemoryStore
-from agent_evolving.online.review_executor.provenance import (
+from skilltend.review_executor.provenance import (
     background_review_context,
     get_write_origin,
     make_write_metadata,
     set_write_origin,
 )
-from agent_evolving.online.review_executor import run_background_review
+from skilltend.review_executor import run_background_review
 from .stores import (
     SKILL_STATE_ACTIVE,
     SKILL_STATE_ARCHIVED,
@@ -46,7 +46,7 @@ from .stores import (
     skill_restore,
     skill_set_pinned,
 )
-from agent_evolving.online.types import (
+from skilltend.types import (
     ReviewAction,
     ReviewMode,
     ReviewResult,

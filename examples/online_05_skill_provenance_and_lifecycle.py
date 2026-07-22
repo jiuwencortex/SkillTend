@@ -17,11 +17,11 @@ import asyncio
 import tempfile
 from pathlib import Path
 
-from agent_evolving.online import (
+from skilltend import (
     background_review_context,
     get_write_origin,
 )
-from agent_evolving.online.stores.skill import (
+from skilltend.stores.skill import (
     SKILL_STATE_ACTIVE,
     UsageSidecar,
     skill_archive,

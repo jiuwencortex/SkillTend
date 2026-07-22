@@ -19,7 +19,7 @@ New vs original implementation:
 from pathlib import Path
 from typing import List
 
-from agent_evolving.online.stores.skill.skill_finder import _ARCHIVE_SUBDIR
+from skilltend.stores.skill.skill_finder import _ARCHIVE_SUBDIR
 
 
 # ── Public API ────────────────────────────────────────────────────────────────

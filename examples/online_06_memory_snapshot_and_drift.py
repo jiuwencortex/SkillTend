@@ -23,7 +23,7 @@ from pathlib import Path
 
 import tempfile
 
-from agent_evolving.online.stores.memory import MemoryStore
+from skilltend.stores.memory import MemoryStore
 
 
 def demo() -> None:

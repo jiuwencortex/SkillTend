@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Tuple
 
-from agent_evolving.online.stores.memory._io_helpers import (
+from skilltend.stores.memory._io_helpers import (
     _ENTRY_DELIMITER,
     _read_entries,
     _write_entries,

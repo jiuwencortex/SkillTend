@@ -40,21 +40,21 @@ from typing import TYPE_CHECKING, Dict, List, Optional
 import logging
 logger = logging.getLogger(__name__)
 
-from agent_evolving.online.stores.skill.api.skill_archiver import skill_archive
-from agent_evolving.online.stores.skill.api.skill_lister import skill_list
-from agent_evolving.online.stores.skill.api.skill_reader import skill_read
-from agent_evolving.online.stores.skill.skill_finder import _find_skill
-from agent_evolving.online.stores.skill.skill_states import (
+from skilltend.stores.skill.api.skill_archiver import skill_archive
+from skilltend.stores.skill.api.skill_lister import skill_list
+from skilltend.stores.skill.api.skill_reader import skill_read
+from skilltend.stores.skill.skill_finder import _find_skill
+from skilltend.stores.skill.skill_states import (
     SKILL_STATE_ACTIVE,
     SKILL_STATE_ARCHIVED,
     SKILL_STATE_STALE,
 )
-from agent_evolving.online.stores.skill.usages.usage_reader import _read_usage
-from agent_evolving.online.stores.skill.usages.usage_sidecar import UsageSidecar
-from agent_evolving.online.stores.skill.usages.usage_writer import _write_usage
+from skilltend.stores.skill.usages.usage_reader import _read_usage
+from skilltend.stores.skill.usages.usage_sidecar import UsageSidecar
+from skilltend.stores.skill.usages.usage_writer import _write_usage
 
 if TYPE_CHECKING:
-    from agent_evolving.online.config import BackgroundReviewConfig
+    from skilltend.config import BackgroundReviewConfig
 
 
 # ── Data types ─────────────────────────────────────────────────────────────────

@@ -49,10 +49,10 @@ logger = logging.getLogger(__name__)
 from openjiuwen.core.single_agent.rail.base import AgentCallbackContext
 from openjiuwen.harness.rails.base import DeepAgentRail
 
-from agent_evolving.online.config import BackgroundReviewConfig
-from agent_evolving.online.curator import SkillCurator
-from agent_evolving.online.review_executor import run_background_review
-from agent_evolving.online.types import ReviewMode, ReviewResult, ReviewTrigger
+from skilltend.config import BackgroundReviewConfig
+from skilltend.curator import SkillCurator
+from skilltend.review_executor import run_background_review
+from skilltend.types import ReviewMode, ReviewResult, ReviewTrigger
 
 
 # ── Tool name sets that trigger counter resets ─────────────────────────────

@@ -17,7 +17,7 @@ New vs original implementation:
 from dataclasses import dataclass
 from typing import Optional
 
-from agent_evolving.online.stores.skill.skill_states import SKILL_STATE_ACTIVE
+from skilltend.stores.skill.skill_states import SKILL_STATE_ACTIVE
 
 
 # ── Usage sidecar ─────────────────────────────────────────────────────────────

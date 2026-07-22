@@ -26,7 +26,7 @@ Usage:
     python examples/agent_evolving_hermess/05_session_resume_hydration.py
 """
 import asyncio
-from agent_evolving.online import BackgroundReviewConfig, BackgroundReviewRail
+from skilltend import BackgroundReviewConfig, BackgroundReviewRail
 
 
 def simulate_history(num_user_turns: int):

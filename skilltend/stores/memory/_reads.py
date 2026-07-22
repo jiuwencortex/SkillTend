@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import List
 
-from agent_evolving.online.stores.memory._io_helpers import _read_entries
+from skilltend.stores.memory._io_helpers import _read_entries
 
 
 class _ReadsMixin:

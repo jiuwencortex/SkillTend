@@ -18,8 +18,8 @@ import json
 from pathlib import Path
 from dataclasses import asdict
 
-from agent_evolving.online.stores.skill.atomic_writter import _atomic_write
-from agent_evolving.online.stores.skill.usages.usage_sidecar import UsageSidecar
+from skilltend.stores.skill.atomic_writter import _atomic_write
+from skilltend.stores.skill.usages.usage_sidecar import UsageSidecar
 
 
 def _write_usage(skill_dir: Path, usage: UsageSidecar) -> None:

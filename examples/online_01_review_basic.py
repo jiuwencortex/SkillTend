@@ -17,7 +17,7 @@ Usage:
 import asyncio
 from pathlib import Path
 
-from agent_evolving.online import BackgroundReviewConfig, BackgroundReviewRail
+from skilltend import BackgroundReviewConfig, BackgroundReviewRail
 
 
 async def main():

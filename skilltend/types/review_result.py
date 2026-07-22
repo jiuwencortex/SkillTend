@@ -9,8 +9,8 @@ from typing import List, Optional
 
 from dataclasses import dataclass, field
 
-from agent_evolving.online.types.review_action import ReviewAction
-from agent_evolving.online.types.review_trigger import ReviewTrigger
+from skilltend.types.review_action import ReviewAction
+from skilltend.types.review_trigger import ReviewTrigger
 
 
 @dataclass

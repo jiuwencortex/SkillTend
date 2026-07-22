@@ -20,13 +20,13 @@ import re
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-from agent_evolving.online.stores.skill.atomic_writter import _atomic_write
-from agent_evolving.online.stores.skill.frontmatter_handler import _validate_frontmatter
-from agent_evolving.online.stores.skill.skill_finder import _find_skill
-from agent_evolving.online.stores.skill import _get_lock
-from agent_evolving.online.stores.skill.usages.usage_sidecar import UsageSidecar
-from agent_evolving.online.stores.skill import _write_usage
-from agent_evolving.online.stores.skill.max_skill_size import _MAX_SKILL_SIZE
+from skilltend.stores.skill.atomic_writter import _atomic_write
+from skilltend.stores.skill.frontmatter_handler import _validate_frontmatter
+from skilltend.stores.skill.skill_finder import _find_skill
+from skilltend.stores.skill import _get_lock
+from skilltend.stores.skill.usages.usage_sidecar import UsageSidecar
+from skilltend.stores.skill import _write_usage
+from skilltend.stores.skill.max_skill_size import _MAX_SKILL_SIZE
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
@@ -56,7 +56,7 @@ async def skill_create(
         return False, f"Skill '{name}' already exists."
 
     # Import here to avoid circular imports at module level
-    from agent_evolving.online.review_executor.provenance import get_write_origin
+    from skilltend.review_executor.provenance import get_write_origin
 
     origin = get_write_origin()
     created_by = "agent" if origin == "background_review" else "user"

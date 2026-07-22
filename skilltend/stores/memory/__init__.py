@@ -16,6 +16,6 @@ Package layout:
     _memory_store.py  — MemoryStore (composes all mixins)
     __init__.py       — re-exports MemoryStore
 """
-from agent_evolving.online.stores.memory.memory_store import MemoryStore
+from skilltend.stores.memory.memory_store import MemoryStore
 
 __all__ = ["MemoryStore"]

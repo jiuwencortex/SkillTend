@@ -17,7 +17,7 @@ New vs original implementation:
 import json
 from pathlib import Path
 
-from agent_evolving.online.stores.skill.usages.usage_sidecar import UsageSidecar
+from skilltend.stores.skill.usages.usage_sidecar import UsageSidecar
 
 
 def _read_usage(skill_dir: Path) -> UsageSidecar:

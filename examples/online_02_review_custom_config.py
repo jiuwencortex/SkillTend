@@ -13,7 +13,7 @@ Usage:
 import asyncio
 from pathlib import Path
 
-from agent_evolving.online import (
+from skilltend import (
     BackgroundReviewConfig,
     BackgroundReviewRail,
     ReviewMode,

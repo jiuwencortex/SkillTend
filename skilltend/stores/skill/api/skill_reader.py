@@ -19,9 +19,9 @@ New vs original implementation:
 from pathlib import Path
 from typing import Optional
 
-from agent_evolving.online.stores.skill.skill_finder import _find_skill
-from agent_evolving.online.stores.skill.usages.usage_reader import _read_usage
-from agent_evolving.online.stores.skill import _write_usage
+from skilltend.stores.skill.skill_finder import _find_skill
+from skilltend.stores.skill.usages.usage_reader import _read_usage
+from skilltend.stores.skill import _write_usage
 
 
 # ── Public API ────────────────────────────────────────────────────────────────
