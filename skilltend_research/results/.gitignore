@@ -1,0 +1,9 @@
+# Ignore large result files and plots; keep findings reports
+*.jsonl
+*.png
+*.pkl
+*.npy
+
+# Keep findings reports (committed after study completes)
+!findings_*.md
+!*_findings.json

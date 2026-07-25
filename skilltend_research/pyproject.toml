@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "skilltend-research"
+version = "0.1.0"
+description = "Empirical research track for SkillTend — parameter validation and architectural studies"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary — Huawei Technologies Co., Ltd." }
+authors = [
+    { name = "Huawei Technologies Co., Ltd." },
+]
+dependencies = [
+    # Production system under study
+    "skilltend",
+    # Metrics & analysis
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "scikit-learn>=1.4",
+    "xgboost>=2.0",
+    "zstandard>=0.22",
+    # Embeddings (via litellm embedding API)
+    "litellm>=1.0",
+    # Plotting
+    "matplotlib>=3.8",
+    # Async
+    "anyio>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ipykernel>=6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["shared", "study_01_skill_quality_metrics", "study_02_trigger_policy",
+            "study_03_review_model_calibration", "study_04_memory_abstraction",
+            "study_05_lifecycle_optimization", "study_06_prompt_sensitivity",
+            "study_07_skill_interference", "study_08_library_dynamics"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
