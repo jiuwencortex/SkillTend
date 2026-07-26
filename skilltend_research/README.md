@@ -4,7 +4,7 @@ Empirical research track for SkillTend. Every study produces a concrete,
 actionable recommendation for a parameter or design decision in the
 production `skilltend/` package.
 
-See `../docs/research_plan.md` for the full research agenda.
+See `docs/guide.md` for the full operational guide (what each study does, how to run it, how to read the results).
 
 ---
 
